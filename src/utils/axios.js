@@ -1,5 +1,5 @@
 import axios from "axios";
-const ENV = require("@/constants/env");
+import ENV from "@/constants/env";
 
 export const HTTP = axios.create({
   baseURL: ENV.PUBLIC_URL,

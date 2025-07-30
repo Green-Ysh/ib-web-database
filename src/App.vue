@@ -1,20 +1,24 @@
-
 <template>
-  <a-config-provider
-    :theme="theme"
-  >
-    <h1>You did it!</h1>
-    <a-button type="primary">Primary Button</a-button>
-    <p>
-      Visit
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a>
-      to read the documentation
-    </p>
-    <a-radio>Radio</a-radio>
-    <a-checkbox>Checkbox</a-checkbox>
-  </a-config-provider>
+  <div id="app">
+    <a-config-provider :theme="theme">
+      <component :is="layout">
+        <router-view />
+      </component>
+    </a-config-provider>
+  </div>
 </template>
 <script setup>
-import theme from '@/assets/styles/antdv/index'
+import theme from "@/assets/styles/antdv/index";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+
+const layout = computed(() => {
+  return "layout-" + (route.meta.layout || "default").toLowerCase();
+});
 </script>
-<style scoped></style>
+<style lang="scss">
+body {
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+}
+</style>
