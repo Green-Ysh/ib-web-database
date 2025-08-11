@@ -1,4 +1,6 @@
 // button.js
+import variables from './variables';
+
 const Button = {
   // === 基础样式配置 (对应 .ant-btn) ===
   // 高度: height: 36px
@@ -28,20 +30,20 @@ const Button = {
   borderWidth: 0,
   
   // === 默认按钮颜色 (对应 .ant-btn) ===
-  // color: $primary-color (使用全局 colorPrimary)
-  colorText: '#910e0e', // 和全局 colorPrimary 保持一致
+  // color: $primary-color (使用全局 colorPrimary)  // 全局配置
+  colorPrimary: variables.primaryColor, // 对应 $primary-colorPrimary 保持一致
   // background: $light-primary-color  
-  colorBgContainer: '#fff1f0',
+  colorBgContainer: variables.lightPrimaryColor,
   // border: none
   colorBorder: 'transparent',
   
   // === 默认按钮悬停状态 (.ant-btn:hover, :active, :focus) ===
   // color: $primary-color (保持不变)
-  colorTextHover: '#910e0e',
-  colorTextActive: '#910e0e',
+  colorTextHover: variables.primaryColor,
+  colorTextActive: variables.primaryColor,
   // background: $light-primary-hover-color
-  colorBgContainerHover: '#ffece8',
-  colorBgContainerActive: '#ffece8',
+  colorBgContainerHover: variables.lightPrimaryHoverColor,
+  colorBgContainerActive: variables.lightPrimaryHoverColor,
   // border: none (保持透明)
   colorBorderHover: 'transparent',
   colorBorderActive: 'transparent',
@@ -54,8 +56,8 @@ const Button = {
   // === Primary 按钮悬停状态 (.ant-btn-primary:hover, :active, :focus) ===
   // color: #fff (保持不变)
   // background: $dark-primary-color
-  colorPrimaryHover: '#7a0a0a',    // 比主色更深
-  colorPrimaryActive: '#7a0a0a',
+  colorPrimaryHover: variables.darkPrimaryColor,
+  colorPrimaryActive: variables.darkPrimaryColor,
   
   // === Dashed 按钮样式 (对应 .ant-btn-dashed) ===
   // color: #393b41

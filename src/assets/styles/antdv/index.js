@@ -1,4 +1,16 @@
 import Button from "./button";
+import Menu from "./menu";
+import Avatar from "./avatar";
+import Card from "./card";
+import DatePicker from "./date-picker";
+import Form from "./form";
+import InputNumber from "./input-number";
+import Input from "./input";
+import Modal from "./modal";
+import Pagination from "./pagination";
+import Select from "./select";
+import Tab from "./tab";
+import Table from "./table";
 const theme = {
   token: {
     // 全局主色
@@ -30,6 +42,18 @@ const theme = {
   },
   components: {
     Button,
+    Menu,
+    Avatar,
+    Card,
+    DatePicker,
+    Form,
+    InputNumber,
+    Input,
+    Modal,
+    Pagination,
+    Select,
+    Tab,
+    Table,
   },
 };
 
