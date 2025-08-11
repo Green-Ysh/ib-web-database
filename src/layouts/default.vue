@@ -1,5 +1,4 @@
 <template>
-  <div>
     <a-layout id="layout-default" :class="['layout-default', layoutClass]">
       <DefaultHeader></DefaultHeader>
 
@@ -9,7 +8,6 @@
 
       <DefaultFooter></DefaultFooter>
     </a-layout>
-  </div>
 </template>
 
 <script setup>
@@ -27,10 +25,12 @@ const layoutClass = computed(() => {
 
 <style scoped lang="scss">
 .layout-default {
+  height: 100%;
   .layout-content {
+    position: relative;
     // 此高度为header高度
-    padding-top: 56px;
-    min-height: calc(100vh - 70px); // 此高度为footer高度
+    padding-top: 60px;
+    min-height: calc(100vh - 60px); // 此高度为footer高度
   }
 }
 </style>

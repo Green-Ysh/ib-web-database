@@ -1,6 +1,6 @@
 {
-  "name": "IB数据中台",
-  "version": "0.0.0",
+  "name": "ib-database-web",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
+    "@vueuse/core": "^13.6.0",
     "ant-design-vue": "^4.2.6",
     "axios": "^1.11.0",
     "dayjs": "^1.11.13",

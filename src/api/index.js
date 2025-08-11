@@ -1,4 +1,5 @@
-const files = require.context(".", false, /\.js$/);
+// Using Vite's import.meta.glob instead of require.context
+const files = import.meta.glob('./*.js', { eager: true });
 const modules = {};
 
 function getCamelCaseName(name) {
@@ -15,11 +16,11 @@ function getCamelCaseName(name) {
   }
 }
 
-files.keys().forEach((key) => {
+Object.keys(files).forEach((key) => {
   if (key === "./index.js") return;
   const tmpKey = key.replace(/(\.\/|\.js)/g, "");
   const camelCaseName = getCamelCaseName(tmpKey);
-  modules[camelCaseName] = files(key);
+  modules[camelCaseName] = files[key].default || files[key];
 });
 
 export default modules;

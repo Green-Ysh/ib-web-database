@@ -20,3 +20,12 @@ export const debounce = (fn, ms = 50) => {
     timer = setTimeout(() => fn.apply(null, args), ms);
   };
 };
+
+// url 转换
+export const transUrl = (url) => {
+  if (url.endsWith("/")) {
+    const lastIndex = url.lastIndexOf("/");
+    return url.substr(0, lastIndex);
+  }
+  return url;
+};

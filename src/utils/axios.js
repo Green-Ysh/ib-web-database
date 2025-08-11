@@ -1,6 +1,6 @@
 import axios from "axios";
 import ENV from "@/constants/env";
-
+import { notification } from "ant-design-vue";
 export const HTTP = axios.create({
   baseURL: ENV.PUBLIC_URL,
   withCredentials: true,
@@ -14,13 +14,6 @@ export const HTTP = axios.create({
 
 HTTP.defaults.retry = 2;
 HTTP.defaults.retryDelay = 500;
-
-HTTP.interceptors.request.use((config) => {
-  if (config.method !== "get") {
-    config.headers.csrftoken = "";
-  }
-  return config;
-});
 
 function handleParams(api, rawData, rawMethod) {
   const newUrl = api;
@@ -57,8 +50,13 @@ function handleParams(api, rawData, rawMethod) {
 function responseError(response) {
   const { status, data = {} } = response;
   const curHref = window.encodeURIComponent(window.location.href);
+  const { path, error } = data;
   const toastFn = (errorMsg) => {
-    // TODO待用toast提示错误信息
+    notification.error({
+      message: "服务: " + path,
+      description: error || errorMsg,
+      duration: 2,
+    });
   };
   const actions = new Map([
     [400, toastFn.bind(null, "参数错误")],
