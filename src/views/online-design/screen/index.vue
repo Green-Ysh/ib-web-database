@@ -1,44 +1,77 @@
 <template>
-  <div class="screen-design-container">
-    <h1>大屏设计</h1>
-    <div class="content-area">
-      <p>大屏设计功能区域</p>
-    </div>
-  </div>
+  <LfContent title="">
+    <template #content>
+      <div class="tabChange">
+        <a-tabs v-model:activeKey="activeKey" size="large" @tabClick="onTabClick">
+          <a-tab-pane :key="SCREEN_TAB_KEY.design" tab="设计">
+            <ScreenDesign v-if="activeKey === SCREEN_TAB_KEY.design"></ScreenDesign>
+          </a-tab-pane>
+          <a-tab-pane :key="SCREEN_TAB_KEY.config" tab="配置">
+            <ScreenConfig v-if="activeKey === SCREEN_TAB_KEY.config"></ScreenConfig>
+          </a-tab-pane>
+          <a-tab-pane :key="SCREEN_TAB_KEY.recycle" tab="回收站">
+            <ScreenRecycle v-if="activeKey === SCREEN_TAB_KEY.recycle"></ScreenRecycle>
+          </a-tab-pane>
+        </a-tabs>
+      </div>
+    </template>
+  </LfContent>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { reactive, watch, toRefs, computed, getCurrentInstance } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import LfContent from "@/layouts/components/leftside-content.vue";
+import { SCREEN_TAB_KEY } from "@/constants/contribute.js";
 
-onMounted(() => {
-  console.log('大屏设计页面已加载');
+// 组件需要创建
+import ScreenDesign from "./components/screen-design.vue";
+import ScreenConfig from "./components/screen-config.vue";
+import ScreenRecycle from "./components/screen-recycle.vue";
+
+const router = useRouter();
+const route = useRoute();
+const { proxy } = getCurrentInstance();
+
+const showKeys = computed(() => {
+  return [SCREEN_TAB_KEY.design, SCREEN_TAB_KEY.config, SCREEN_TAB_KEY.recycle];
 });
+
+const state = reactive({
+  activeKey: showKeys.value[0] || SCREEN_TAB_KEY.design,
+});
+
+const onTabClick = (activeKey) => {
+  // 可以添加埋点或其他操作
+  console.log('切换到标签:', activeKey);
+};
+
+watch(
+  () => state.activeKey,
+  async (newVal) => {
+    const query = { ...route.query };
+    query.screenTab = newVal;
+    await router.replace({ query });
+  }
+);
+
+watch(
+  () => route.query.screenTab,
+  (newVal) => {
+    if (newVal && showKeys.value.includes(newVal)) state.activeKey = newVal;
+  },
+  { immediate: true }
+);
+
+const { activeKey } = toRefs(state);
 </script>
 
 <style lang="scss" scoped>
-.screen-design-container {
-  padding: 20px;
-  
-  h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .content-area {
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    padding: 20px;
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    p {
-      font-size: 16px;
-      color: #666;
-    }
-  }
+:deep(.ant-tabs-nav) {
+  margin-bottom: 10px;
+}
+
+.left-side-content {
+  padding-top: 0 !important;
 }
 </style>
