@@ -11,6 +11,11 @@ const routes = [
     name: "首页",
     component: () => import(/* webpackChunkName: "home" */ "../views/home/index.vue"),
   },
+  {
+    path: "/designScreen",
+    name: "大屏设计",
+    component: () => import(/* webpackChunkName: "screen" */ "../views/design/screen/index.vue"),
+  },
   ...reportCenter,
   ...onlineDesign,
   {

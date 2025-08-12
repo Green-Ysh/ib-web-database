@@ -41,5 +41,9 @@ const slotTitle = !!useSlots().title;
     font-size: 18px;
     line-height: 25px;
   }
+
+  .content {
+    height: 100%;
+  }
 }
 </style>

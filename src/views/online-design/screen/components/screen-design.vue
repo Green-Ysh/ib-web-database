@@ -97,6 +97,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import { message } from 'ant-design-vue';
+import { useRouter } from 'vue-router';
 import { 
   PlusOutlined, 
   EyeOutlined, 
@@ -108,6 +109,8 @@ import {
   ReloadOutlined,
   SortAscendingOutlined
 } from '@ant-design/icons-vue';
+
+const router = useRouter();
 
 // 搜索相关
  const searchValue = ref('');
@@ -176,6 +179,7 @@ const onSearch = (value) => {
 // 新建大屏
 const handleCreate = () => {
   message.success('正在创建新大屏...');
+  router.push('/designScreen');
   // 跳转到创建页面或打开创建对话框
 };
 
@@ -271,9 +275,7 @@ onMounted(() => {
   
   .screen-content {
     flex: 1;
-    background-color: #f5f5f8;
     border-radius: 4px;
-    padding: 20px;
     overflow-y: auto;
     
     .screen-cards {

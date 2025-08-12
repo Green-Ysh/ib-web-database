@@ -2,14 +2,14 @@
   <LfContent title="">
     <template #content>
       <div class="tabChange">
-        <a-tabs v-model:activeKey="activeKey" size="large" @tabClick="onTabClick">
-          <a-tab-pane :key="SCREEN_TAB_KEY.design" tab="设计">
+        <a-tabs :style="{ height: '100%' }" v-model:activeKey="activeKey" size="large" @tabClick="onTabClick">
+          <a-tab-pane :style="{ height: '100%' }" :key="SCREEN_TAB_KEY.design" tab="设计">
             <ScreenDesign v-if="activeKey === SCREEN_TAB_KEY.design"></ScreenDesign>
           </a-tab-pane>
-          <a-tab-pane :key="SCREEN_TAB_KEY.config" tab="配置">
+          <a-tab-pane :style="{ height: '100%' }" :key="SCREEN_TAB_KEY.config" tab="配置">
             <ScreenConfig v-if="activeKey === SCREEN_TAB_KEY.config"></ScreenConfig>
           </a-tab-pane>
-          <a-tab-pane :key="SCREEN_TAB_KEY.recycle" tab="回收站">
+          <a-tab-pane :style="{ height: '100%' }" :key="SCREEN_TAB_KEY.recycle" tab="回收站">
             <ScreenRecycle v-if="activeKey === SCREEN_TAB_KEY.recycle"></ScreenRecycle>
           </a-tab-pane>
         </a-tabs>
@@ -70,7 +70,12 @@ const { activeKey } = toRefs(state);
 :deep(.ant-tabs-nav) {
   margin-bottom: 10px;
 }
-
+:deep(.ant-tabs-content) {
+  height: 100%;
+}
+.tabChange {
+  height: 100%;
+}
 .left-side-content {
   padding-top: 0 !important;
 }
